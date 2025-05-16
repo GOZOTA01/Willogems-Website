@@ -1,0 +1,21 @@
+{
+  "name": "hardware-website",
+  "version": "1.0.0",
+  "description": "A website for a hardware company showcasing products and services.",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "live-server src",
+    "build": "echo 'Build process not defined yet.'"
+  },
+  "keywords": [
+    "hardware",
+    "website",
+    "company"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
