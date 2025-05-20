@@ -20,18 +20,29 @@ const transporter = nodemailer.createTransport({
 
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
-    const { name, email, message } = req.body;
+    console.log('Received request body:', req.body); // Debug log
+
+    const { name, email, phone, message } = req.body;
+
+    // Debug log for each field
+    console.log('Name:', name);
+    console.log('Email:', email);
+    console.log('Phone:', phone);
+    console.log('Message:', message);
 
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: 'gabrielgozo2002@gmail.com',
-        subject: `New Contact Form Message from ${name}`,
+        subject: 'New Contact Form from Willogems',
         html: `
             <h3>New Contact Form Submission</h3>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Message:</strong></p>
-            <p>${message}</p>
+            <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 5px;">
+                <p style="margin: 10px 0;"><strong>Name:</strong> ${name}</p>
+                <p style="margin: 10px 0;"><strong>Email:</strong> ${email}</p>
+                <p style="margin: 10px 0;"><strong>Phone Number:</strong> ${phone}</p>
+                <p style="margin: 10px 0;"><strong>Message:</strong></p>
+                <p style="margin: 10px 0; padding: 10px; background-color: white; border-radius: 5px;">${message}</p>
+            </div>
         `
     };
 
