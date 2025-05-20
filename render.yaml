@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: willogems-server
+    env: node
+    buildCommand: cd src/server && npm install
+    startCommand: cd src/server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false 
