@@ -44,6 +44,18 @@ app.post('/api/contact', async (req, res) => {
     console.log('Phone:', phone);
     console.log('Message:', message);
 
+    // Check if email configuration is set
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+        console.error('Email configuration missing:', {
+            hasEmailUser: !!process.env.EMAIL_USER,
+            hasEmailPass: !!process.env.EMAIL_PASS
+        });
+        return res.status(500).json({ 
+            message: 'Server email configuration is missing',
+            error: 'Email configuration error'
+        });
+    }
+
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: 'gabrielgozo2002@gmail.com',
@@ -62,15 +74,18 @@ app.post('/api/contact', async (req, res) => {
 
     try {
         // Verify the transporter configuration
+        console.log('Verifying transporter configuration...');
         await transporter.verify();
         console.log('Transporter configuration is valid');
 
         // Send the email
+        console.log('Attempting to send email...');
         const info = await transporter.sendMail(mailOptions);
         console.log('Email sent successfully:', info);
         res.status(200).json({ message: 'Email sent successfully!' });
     } catch (error) {
         console.error('Detailed error:', error);
+        console.error('Error stack:', error.stack);
         res.status(500).json({ 
             message: 'Error sending email',
             error: error.message 
