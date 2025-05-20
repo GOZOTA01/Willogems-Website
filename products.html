@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Willogems</title>
+    <link rel="stylesheet" href="src/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="top-taskbar">
+        <img src="src/taskbar.jpeg" alt="Taskbar" class="taskbar-image">
+    </div>
+
+    <main>
+        <section class="products-header">
+            <h1>Our Products</h1>
+            <div class="products-filter">
+                <select class="category-filter">
+                    <option value="all">All Categories</option>
+                    <option value="tools">Tools</option>
+                    <option value="power-tools">Power Tools</option>
+                    <option value="safety">Safety Equipment</option>
+                </select>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search products...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-grid">
+            <!-- Tools Category -->
+            <div class="product-card" data-category="tools">
+                <div class="product-image">
+                    <img src="path-to-tool-image.jpg" alt="Premium Tool Set">
+                </div>
+                <h3>Premium Tool Set</h3>
+                <p>Complete set of professional-grade tools</p>
+                <span class="price">$149.99</span>
+                <button class="buy-button">Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="tools">
+                <div class="product-image">
+                    <img src="path-to-tool-image.jpg" alt="Basic Tool Kit">
+                </div>
+                <h3>Basic Tool Kit</h3>
+                <p>Essential tools for home projects</p>
+                <span class="price">$79.99</span>
+                <button class="buy-button">Add to Cart</button>
+            </div>
+
+            <!-- Power Tools Category -->
+            <div class="product-card" data-category="power-tools">
+                <div class="product-image">
+                    <img src="path-to-tool-image.jpg" alt="Cordless Drill">
+                </div>
+                <h3>Cordless Drill</h3>
+                <p>20V Lithium-ion battery powered drill</p>
+                <span class="price">$129.99</span>
+                <button class="buy-button">Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="power-tools">
+                <div class="product-image">
+                    <img src="path-to-tool-image.jpg" alt="Circular Saw">
+                </div>
+                <h3>Circular Saw</h3>
+                <p>Professional grade circular saw</p>
+                <span class="price">$159.99</span>
+                <button class="buy-button">Add to Cart</button>
+            </div>
+
+            <!-- Safety Equipment Category -->
+            <div class="product-card" data-category="safety">
+                <div class="product-image">
+                    <img src="path-to-tool-image.jpg" alt="Safety Kit">
+                </div>
+                <h3>Complete Safety Kit</h3>
+                <p>Includes gloves, goggles, and ear protection</p>
+                <span class="price">$49.99</span>
+                <button class="buy-button">Add to Cart</button>
+            </div>
+
+            <div class="product-card" data-category="safety">
+                <div class="product-image">
+                    <img src="path-to-tool-image.jpg" alt="Hard Hat">
+                </div>
+                <h3>Professional Hard Hat</h3>
+                <p>ANSI certified safety hard hat</p>
+                <span class="price">$29.99</span>
+                <button class="buy-button">Add to Cart</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="phone-numbers">
+                    <p><i class="fas fa-phone"></i> +263 772 138 007</p>
+                    <p><i class="fas fa-phone"></i> +263 718 090 910</p>
+                    <p><i class="fas fa-phone"></i> +263 777 218 007</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Visit Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 44 Mbuya Nehanda Street</p>
+                <p>Opposite ZPCS</p>
+                <p>Harare, Zimbabwe</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Hardware Company. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
