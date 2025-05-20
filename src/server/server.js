@@ -32,14 +32,15 @@ const transporter = nodemailer.createTransport({
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
     },
-    tls: {
-        rejectUnauthorized: false // Only use this in production if necessary
-    }
+    debug: true, // Enable debug logging
+    logger: true // Enable logger
 });
 
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
-    console.log('Received request body:', req.body); // Debug log
+    console.log('=== Contact Form Submission Start ===');
+    console.log('Request headers:', req.headers);
+    console.log('Received request body:', req.body);
 
     const { name, email, phone, message } = req.body;
 
@@ -61,6 +62,8 @@ app.post('/api/contact', async (req, res) => {
         });
     }
 
+    console.log('Email configuration present, proceeding with email setup');
+
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: 'gabrielgozo2002@gmail.com',
@@ -78,19 +81,21 @@ app.post('/api/contact', async (req, res) => {
     };
 
     try {
-        // Verify the transporter configuration
-        console.log('Verifying transporter configuration...');
+        console.log('Attempting to verify transporter configuration...');
         await transporter.verify();
-        console.log('Transporter configuration is valid');
+        console.log('Transporter configuration verified successfully');
 
-        // Send the email
         console.log('Attempting to send email...');
         const info = await transporter.sendMail(mailOptions);
         console.log('Email sent successfully:', info);
+        console.log('=== Contact Form Submission End ===');
         res.status(200).json({ message: 'Email sent successfully!' });
     } catch (error) {
-        console.error('Detailed error:', error);
+        console.error('=== Email Error Details ===');
+        console.error('Error name:', error.name);
+        console.error('Error message:', error.message);
         console.error('Error stack:', error.stack);
+        console.error('=== End Error Details ===');
         res.status(500).json({ 
             message: 'Error sending email',
             error: error.message 
