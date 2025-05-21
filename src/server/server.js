@@ -10,12 +10,47 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Debug middleware to log all requests
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+});
+
 // Serve static files from the root directory
 app.use(express.static(path.join(__dirname, '../..')));
 
-// Serve index.html for the root path
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../..', 'index.html'));
+// Basic test route
+app.get('/test', (req, res) => {
+    res.json({ message: 'Server is running' });
+});
+
+// Test email endpoint
+app.get('/test-email', async (req, res) => {
+    console.log('Test email endpoint hit');
+    try {
+        const msg = {
+            to: 'gabrielgozo2002@gmail.com',
+            from: 'gabugozo@gmail.com',
+            subject: 'Test Email from Willogems',
+            text: 'This is a test email from your website server.',
+            html: '<p>This is a test email from your website server.</p>'
+        };
+        
+        console.log('Sending test email...');
+        const response = await sgMail.send(msg);
+        console.log('Test email sent successfully:', response);
+        res.status(200).json({ message: 'Test email sent successfully' });
+    } catch (error) {
+        console.error('Test email error:', error);
+        if (error.response) {
+            console.error('Error response body:', error.response.body);
+        }
+        res.status(500).json({ 
+            message: 'Error sending test email',
+            error: error.message,
+            details: error.response ? error.response.body : null
+        });
+    }
 });
 
 // Health check endpoint
@@ -23,8 +58,16 @@ app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok' });
 });
 
+// Serve index.html for the root path
+app.get('/', (req, res) => {
+    console.log('Serving index.html');
+    res.sendFile(path.join(__dirname, '../..', 'index.html'));
+});
+
 // Set SendGrid API key
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const apiKey = process.env.SENDGRID_API_KEY;
+console.log('API Key length:', apiKey ? apiKey.length : 0);
+sgMail.setApiKey(apiKey);
 
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
@@ -51,8 +94,9 @@ app.post('/api/contact', async (req, res) => {
 
     const msg = {
         to: 'gabrielgozo2002@gmail.com',
-        from: 'gabugozo@gmail.com', // verified sender
+        from: 'gabugozo@gmail.com',
         subject: 'New Contact Form from Willogems',
+        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
         html: `
             <h3>New Contact Form Submission</h3>
             <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 5px;">
@@ -75,17 +119,33 @@ app.post('/api/contact', async (req, res) => {
         console.error('=== Email Error Details ===');
         console.error('Error name:', error.name);
         console.error('Error message:', error.message);
+        if (error.response) {
+            console.error('Error response body:', error.response.body);
+        }
         console.error('Error stack:', error.stack);
         console.error('=== End Error Details ===');
         res.status(500).json({ 
             message: 'Error sending email',
-            error: error.message 
+            error: error.message,
+            details: error.response ? error.response.body : null
         });
     }
+});
+
+// 404 handler
+app.use((req, res) => {
+    console.log('404 - Route not found:', req.url);
+    res.status(404).json({ error: 'Route not found' });
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     console.log('SendGrid API Key is set:', !!process.env.SENDGRID_API_KEY);
+    console.log('Available routes:');
+    console.log('- GET /');
+    console.log('- GET /test');
+    console.log('- GET /test-email');
+    console.log('- GET /health');
+    console.log('- POST /api/contact');
 }); 
