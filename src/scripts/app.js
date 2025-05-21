@@ -34,8 +34,8 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
         console.log('Response data:', data);
 
         if (response.ok) {
-            // Show success message
-            formStatus.textContent = 'Message sent successfully!';
+            // Show success message with delivery note
+            formStatus.textContent = 'Message sent successfully! Please check your email (and spam folder) in a few minutes.';
             formStatus.className = 'form-status success';
             e.target.reset();
         } else {

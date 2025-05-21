@@ -90,7 +90,14 @@ app.post('/api/contact', async (req, res) => {
 
     const msg = {
         to: 'gabrielgozo2002@gmail.com',
-        from: 'gabugozo@gmail.com',
+        from: {
+            email: 'gabugozo@gmail.com',
+            name: 'Willogems Contact Form'
+        },
+        replyTo: {
+            email: email,
+            name: name
+        },
         subject: 'New Contact Form from Willogems',
         text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
         html: `
@@ -102,7 +109,20 @@ app.post('/api/contact', async (req, res) => {
                 <p style="margin: 10px 0;"><strong>Message:</strong></p>
                 <p style="margin: 10px 0; padding: 10px; background-color: white; border-radius: 5px;">${message}</p>
             </div>
-        `
+        `,
+        mailSettings: {
+            sandboxMode: {
+                enable: false
+            }
+        },
+        trackingSettings: {
+            clickTracking: {
+                enable: false
+            },
+            openTracking: {
+                enable: false
+            }
+        }
     };
 
     try {
