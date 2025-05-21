@@ -20,6 +20,7 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
         submitButton.textContent = 'Sending...';
         
         // Send the form data to the server using the current domain
+        console.log('Sending request to:', window.location.origin + '/api/contact');
         const response = await fetch('/api/contact', {
             method: 'POST',
             headers: {
@@ -28,7 +29,9 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
             body: JSON.stringify(formData)
         });
 
+        console.log('Response status:', response.status);
         const data = await response.json();
+        console.log('Response data:', data);
 
         if (response.ok) {
             // Show success message
@@ -36,13 +39,16 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
             formStatus.className = 'form-status success';
             e.target.reset();
         } else {
-            throw new Error(data.message);
+            throw new Error(data.message || 'Server error');
         }
     } catch (error) {
         // Show error message
         formStatus.textContent = 'Error sending message. Please try again.';
         formStatus.className = 'form-status error';
-        console.error('Error:', error);
+        console.error('Error details:', {
+            message: error.message,
+            stack: error.stack
+        });
     } finally {
         // Re-enable submit button
         submitButton.disabled = false;

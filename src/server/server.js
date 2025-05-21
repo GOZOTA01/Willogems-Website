@@ -59,10 +59,19 @@ sgMail.setApiKey(apiKey);
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
     console.log('=== Contact Form Submission Start ===');
-    console.log('Request headers:', req.headers);
-    console.log('Received request body:', req.body);
+    console.log('Request headers:', JSON.stringify(req.headers, null, 2));
+    console.log('Received request body:', JSON.stringify(req.body, null, 2));
 
     const { name, email, phone, message } = req.body;
+
+    // Validate required fields
+    if (!name || !email || !phone || !message) {
+        console.error('Missing required fields:', { name, email, phone, message });
+        return res.status(400).json({ 
+            message: 'All fields are required',
+            error: 'Validation error'
+        });
+    }
 
     // Debug log for each field
     console.log('Name:', name);
@@ -98,8 +107,9 @@ app.post('/api/contact', async (req, res) => {
 
     try {
         console.log('Attempting to send email...');
+        console.log('Message configuration:', JSON.stringify(msg, null, 2));
         const response = await sgMail.send(msg);
-        console.log('Email sent successfully:', response);
+        console.log('Email sent successfully:', JSON.stringify(response, null, 2));
         console.log('=== Contact Form Submission End ===');
         res.status(200).json({ message: 'Email sent successfully!' });
     } catch (error) {
@@ -107,7 +117,7 @@ app.post('/api/contact', async (req, res) => {
         console.error('Error name:', error.name);
         console.error('Error message:', error.message);
         if (error.response) {
-            console.error('Error response body:', error.response.body);
+            console.error('Error response body:', JSON.stringify(error.response.body, null, 2));
         }
         console.error('Error stack:', error.stack);
         console.error('=== End Error Details ===');
