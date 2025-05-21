@@ -19,8 +19,8 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
         submitButton.disabled = true;
         submitButton.textContent = 'Sending...';
         
-        // Send the form data to the server
-        const response = await fetch('http://localhost:3000/api/contact', {
+        // Send the form data to the server using the current domain
+        const response = await fetch('/api/contact', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

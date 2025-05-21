@@ -10,23 +10,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Debug middleware to log all requests
-app.use((req, res, next) => {
-    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-    next();
-});
-
 // Serve static files from the root directory
 app.use(express.static(path.join(__dirname, '../..')));
 
-// Basic test route
-app.get('/test', (req, res) => {
-    res.json({ message: 'Server is running' });
+// Serve index.html for the root path
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../..', 'index.html'));
+});
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok' });
 });
 
 // Test email endpoint
 app.get('/test-email', async (req, res) => {
-    console.log('Test email endpoint hit');
     try {
         const msg = {
             to: 'gabrielgozo2002@gmail.com',
@@ -51,17 +49,6 @@ app.get('/test-email', async (req, res) => {
             details: error.response ? error.response.body : null
         });
     }
-});
-
-// Health check endpoint
-app.get('/health', (req, res) => {
-    res.status(200).json({ status: 'ok' });
-});
-
-// Serve index.html for the root path
-app.get('/', (req, res) => {
-    console.log('Serving index.html');
-    res.sendFile(path.join(__dirname, '../..', 'index.html'));
 });
 
 // Set SendGrid API key
@@ -132,20 +119,8 @@ app.post('/api/contact', async (req, res) => {
     }
 });
 
-// 404 handler
-app.use((req, res) => {
-    console.log('404 - Route not found:', req.url);
-    res.status(404).json({ error: 'Route not found' });
-});
-
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     console.log('SendGrid API Key is set:', !!process.env.SENDGRID_API_KEY);
-    console.log('Available routes:');
-    console.log('- GET /');
-    console.log('- GET /test');
-    console.log('- GET /test-email');
-    console.log('- GET /health');
-    console.log('- POST /api/contact');
 }); 
