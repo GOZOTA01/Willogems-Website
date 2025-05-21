@@ -25,14 +25,12 @@ app.get('/health', (req, res) => {
 
 // Create a transporter using Gmail
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
     auth: {
-        type: 'OAuth2',
         user: process.env.EMAIL_USER,
-        clientId: process.env.GMAIL_CLIENT_ID,
-        clientSecret: process.env.GMAIL_CLIENT_SECRET,
-        refreshToken: process.env.GMAIL_REFRESH_TOKEN,
-        accessToken: process.env.GMAIL_ACCESS_TOKEN
+        pass: process.env.EMAIL_PASS
     }
 });
 
@@ -51,12 +49,10 @@ app.post('/api/contact', async (req, res) => {
     console.log('Message:', message);
 
     // Check if email configuration is set
-    if (!process.env.EMAIL_USER || !process.env.GMAIL_CLIENT_ID || !process.env.GMAIL_CLIENT_SECRET || !process.env.GMAIL_REFRESH_TOKEN) {
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
         console.error('Email configuration missing:', {
             hasEmailUser: !!process.env.EMAIL_USER,
-            hasClientId: !!process.env.GMAIL_CLIENT_ID,
-            hasClientSecret: !!process.env.GMAIL_CLIENT_SECRET,
-            hasRefreshToken: !!process.env.GMAIL_REFRESH_TOKEN
+            hasEmailPass: !!process.env.EMAIL_PASS
         });
         return res.status(500).json({ 
             message: 'Server email configuration is missing',
