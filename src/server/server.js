@@ -1,7 +1,7 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
 const cors = require('cors');
 const path = require('path');
+const sgMail = require('@sendgrid/mail');
 require('dotenv').config();
 
 const app = express();
@@ -23,16 +23,8 @@ app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok' });
 });
 
-// Create a transporter using Gmail
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
+// Set SendGrid API key
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
@@ -48,23 +40,18 @@ app.post('/api/contact', async (req, res) => {
     console.log('Phone:', phone);
     console.log('Message:', message);
 
-    // Check if email configuration is set
-    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        console.error('Email configuration missing:', {
-            hasEmailUser: !!process.env.EMAIL_USER,
-            hasEmailPass: !!process.env.EMAIL_PASS
-        });
+    // Check if SendGrid API key is set
+    if (!process.env.SENDGRID_API_KEY) {
+        console.error('SendGrid API key is missing');
         return res.status(500).json({ 
             message: 'Server email configuration is missing',
             error: 'Email configuration error'
         });
     }
 
-    console.log('Email configuration present, proceeding with email setup');
-
-    const mailOptions = {
-        from: process.env.EMAIL_USER,
+    const msg = {
         to: 'gabrielgozo2002@gmail.com',
+        from: 'gabugozo@gmail.com', // verified sender
         subject: 'New Contact Form from Willogems',
         html: `
             <h3>New Contact Form Submission</h3>
@@ -79,13 +66,9 @@ app.post('/api/contact', async (req, res) => {
     };
 
     try {
-        console.log('Attempting to verify transporter configuration...');
-        await transporter.verify();
-        console.log('Transporter configuration verified successfully');
-
         console.log('Attempting to send email...');
-        const info = await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully:', info);
+        const response = await sgMail.send(msg);
+        console.log('Email sent successfully:', response);
         console.log('=== Contact Form Submission End ===');
         res.status(200).json({ message: 'Email sent successfully!' });
     } catch (error) {
@@ -104,7 +87,5 @@ app.post('/api/contact', async (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    // Log the environment variables (without the password)
-    console.log('Email user:', process.env.EMAIL_USER);
-    console.log('Email pass is set:', !!process.env.EMAIL_PASS);
+    console.log('SendGrid API Key is set:', !!process.env.SENDGRID_API_KEY);
 }); 
