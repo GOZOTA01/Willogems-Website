@@ -35,7 +35,7 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
 
         if (response.ok) {
             // Show success message with delivery note
-            formStatus.textContent = 'Message sent successfully! Willogems will get back to you within an `';
+            formStatus.textContent = 'Message sent successfully! Willogems will get back to you within an hour';
             formStatus.className = 'form-status success';
             e.target.reset();
         } else {

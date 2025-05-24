@@ -92,23 +92,39 @@ app.post('/api/contact', async (req, res) => {
         to: 'gabrielgozo2002@gmail.com',
         from: {
             email: 'gabugozo@gmail.com',
-            name: 'Willogems Contact Form'
+            name: 'Willogems Hardware'
         },
         replyTo: {
             email: email,
             name: name
         },
-        subject: 'New Contact Form from Willogems',
+        subject: `New Contact Form Message from ${name}`,
         text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
         html: `
-            <h3>New Contact Form Submission</h3>
-            <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; border-radius: 5px;">
-                <p style="margin: 10px 0;"><strong>Name:</strong> ${name}</p>
-                <p style="margin: 10px 0;"><strong>Email:</strong> ${email}</p>
-                <p style="margin: 10px 0;"><strong>Phone Number:</strong> ${phone}</p>
-                <p style="margin: 10px 0;"><strong>Message:</strong></p>
-                <p style="margin: 10px 0; padding: 10px; background-color: white; border-radius: 5px;">${message}</p>
-            </div>
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>New Contact Form Message</title>
+            </head>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+                <div style="background-color: #f8f9fa; border-radius: 5px; padding: 20px; margin-bottom: 20px;">
+                    <h2 style="color: #1a4b84; margin-bottom: 20px;">New Contact Form Message</h2>
+                    <p style="margin: 10px 0;"><strong>From:</strong> ${name}</p>
+                    <p style="margin: 10px 0;"><strong>Email:</strong> ${email}</p>
+                    <p style="margin: 10px 0;"><strong>Phone:</strong> ${phone}</p>
+                </div>
+                <div style="background-color: white; border: 1px solid #dee2e6; border-radius: 5px; padding: 20px;">
+                    <h3 style="color: #1a4b84; margin-bottom: 15px;">Message:</h3>
+                    <p style="margin: 0; white-space: pre-wrap;">${message}</p>
+                </div>
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #dee2e6; font-size: 12px; color: #6c757d;">
+                    <p>This message was sent from the Willogems Hardware contact form.</p>
+                    <p>To reply, simply respond to this email.</p>
+                </div>
+            </body>
+            </html>
         `,
         mailSettings: {
             sandboxMode: {
