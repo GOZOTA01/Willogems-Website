@@ -12,4 +12,7 @@ services:
       - key: EMAIL_USER
         sync: false
       - key: EMAIL_PASS
-        sync: false 
+        sync: false
+    domains:
+      - willogems.com
+      - www.willogems.com 
