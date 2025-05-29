@@ -98,7 +98,7 @@ app.post('/api/contact', async (req, res) => {
             email: email,
             name: name
         },
-        subject: `New Contact Form Message from ${name}`,
+        subject: 'New Willogems Customer Contact Form',
         text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
         html: `
             <!DOCTYPE html>
