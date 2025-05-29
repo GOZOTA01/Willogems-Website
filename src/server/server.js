@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const sgMail = require('@sendgrid/mail');
+const twilio = require('twilio');
 require('dotenv').config();
 
 const app = express();
@@ -56,6 +57,10 @@ const apiKey = process.env.SENDGRID_API_KEY;
 console.log('API Key length:', apiKey ? apiKey.length : 0);
 sgMail.setApiKey(apiKey);
 
+const twilioClient = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+const TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER;
+const DESTINATION_PHONE = process.env.DESTINATION_PHONE;
+
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
     console.log('=== Contact Form Submission Start ===');
@@ -89,7 +94,7 @@ app.post('/api/contact', async (req, res) => {
     }
 
     const msg = {
-        to: ['gabrielgozo2002@gmail.com', 'gabugozo@gmail.com'],
+        to: ['gabrielgozo2002@gmail.com', 'gozota01@gettysburg.edu'],
         from: {
             email: 'info@willogems.com',
             name: 'Willogems Hardware'
@@ -146,8 +151,16 @@ app.post('/api/contact', async (req, res) => {
         console.log('Message configuration:', JSON.stringify(msg, null, 2));
         const response = await sgMail.send(msg);
         console.log('Email sent successfully:', JSON.stringify(response, null, 2));
+        // Send SMS via Twilio
+        const smsBody = `New Willogems Contact:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`;
+        await twilioClient.messages.create({
+            body: smsBody,
+            from: process.env.TWILIO_PHONE_NUMBER,
+            to: process.env.DESTINATION_PHONE
+        });
+        console.log('SMS sent successfully');
         console.log('=== Contact Form Submission End ===');
-        res.status(200).json({ message: 'Email sent successfully!' });
+        res.status(200).json({ message: 'Email and SMS sent successfully!' });
     } catch (error) {
         console.error('=== Email Error Details ===');
         console.error('Error name:', error.name);
