@@ -94,7 +94,7 @@ app.post('/api/contact', async (req, res) => {
     }
 
     const msg = {
-        to: ['gabrielgozo2002@gmail.com', 'chigozo3@gmail.com'],
+        to: ['gabrielgozo2002@gmail.com', 'gozota01@gettysburg.edu'],
         from: {
             email: 'info@willogems.com',
             name: 'Willogems Hardware'

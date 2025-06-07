@@ -16,168 +16,169 @@
         <section class="products-header">
             <h1>Our Products</h1>
             <div class="products-filter">
-                <select class="category-filter">
+                <select class="category-filter" id="categoryFilter">
                     <option value="all">All Categories</option>
-                    <option value="tools">Tools</option>
-                    <option value="power-tools">Power Tools</option>
-                    <option value="safety">Safety Equipment</option>
+                    <option value="plumbing">Plumbing</option>
+                    <option value="tiles">Tiles</option>
+                    <option value="bathroom">Bathroom</option>
+                    <option value="kitchen">Kitchen</option>
                 </select>
                 <div class="search-bar">
-                    <input type="text" placeholder="Search products...">
+                    <input type="text" id="searchInput" placeholder="Search products...">
                     <button><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </section>
 
-        <section class="products-grid">
-            <div class="product-card">
+        <section class="products-grid" id="productsGrid">
+            <div class="product-card" data-category="plumbing" data-name="PVC Straight Fitting">
                 <div class="product-image">
                     <img src="src/images/PVC_Straight_Fitting_$2.JPG" alt="PVC Straight Fitting">
                 </div>
                 <h3>PVC Straight Fitting</h3>
                 <span class="price">$2</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="Copper Taps">
                 <div class="product-image">
                     <img src="src/images/Copper_Taps_$2.00.jpeg" alt="Copper Taps">
                 </div>
                 <h3>Copper Taps</h3>
                 <span class="price">$2.00</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="Boss Connector">
                 <div class="product-image">
                     <img src="src/images/Boss_Connector_$0.50.jpg" alt="Boss Connector">
                 </div>
                 <h3>Boss Connector</h3>
                 <span class="price">$0.50</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="50mm PVC FITTINGS">
                 <div class="product-image">
                     <img src="src/images/50mm_PVC_FITTINGS_$0.50.jpg" alt="50mm PVC FITTINGS">
                 </div>
                 <h3>50mm PVC FITTINGS</h3>
                 <span class="price">$0.50</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="CopperFittings">
                 <div class="product-image">
                     <img src="src/images/CopperFittings_$0.50.png" alt="CopperFittings">
                 </div>
                 <h3>CopperFittings</h3>
                 <span class="price">$0.50</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="bathroom" data-name="Shower rose">
                 <div class="product-image">
                     <img src="src/images/Shower_rose_$5.JPG" alt="Shower rose">
                 </div>
                 <h3>Shower rose</h3>
                 <span class="price">$5</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="bathroom" data-name="Sink Toilet Set">
                 <div class="product-image">
                     <img src="src/images/Sink_Toilet_Set_$26.JPG" alt="Sink Toilet Set">
                 </div>
                 <h3>Sink Toilet Set</h3>
                 <span class="price">$26</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="tiles" data-name="40x40 Tiles Matt Finish">
                 <div class="product-image">
                     <img src="src/images/40x40_Tiles_Matt_Finish_$8_$50.jpeg" alt="40x40 Tiles Matt Finish">
                 </div>
                 <h3>40x40 Tiles Matt Finish</h3>
                 <span class="price">$8, $50</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="tiles" data-name="SupaFix Porcelain">
                 <div class="product-image">
                     <img src="src/images/SupaFix_Porcelain_$4.JPG" alt="SupaFix Porcelain">
                 </div>
                 <h3>SupaFix Porcelain</h3>
                 <span class="price">$4</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="tiles" data-name="SupaFix Ceramic Tile Adhesive">
                 <div class="product-image">
                     <img src="src/images/SupaFix_Ceramic_Tile_Adhesive_$3.60.JPG" alt="SupaFix Ceramic Tile Adhesive">
                 </div>
                 <h3>SupaFix Ceramic Tile Adhesive</h3>
                 <span class="price">$3.60</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="Gas Canister">
                 <div class="product-image">
                     <img src="src/images/Gas_Canister_$2.50.jpeg" alt="Gas Canister">
                 </div>
                 <h3>Gas Canister</h3>
                 <span class="price">$2.50</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="bathroom" data-name="Bath Tub">
                 <div class="product-image">
                     <img src="src/images/Bath_Tub_$70.jpeg" alt="Bath Tub">
                 </div>
                 <h3>Bath Tub</h3>
                 <span class="price">$70</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="Gully head">
                 <div class="product-image">
                     <img src="src/images/Gully_head_$2.JPG" alt="Gully head">
                 </div>
                 <h3>Gully head</h3>
                 <span class="price">$2</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="bathroom" data-name="Bathroom Basin Mixer Tap">
                 <div class="product-image">
                     <img src="src/images/Bathroom_Basin_Mixer_Tap_$3.PNG" alt="Bathroom Basin Mixer Tap">
                 </div>
                 <h3>Bathroom Basin Mixer Tap</h3>
                 <span class="price">$3</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="RV Faucet">
                 <div class="product-image">
                     <img src="src/images/RV_Faucet_$10.jpeg" alt="RV Faucet">
                 </div>
                 <h3>RV Faucet</h3>
                 <span class="price">$10</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="Wall Faucet">
                 <div class="product-image">
                     <img src="src/images/Wall_Faucet_$7.JPG" alt="Wall Faucet">
                 </div>
                 <h3>Wall Faucet</h3>
                 <span class="price">$7</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="PVC Rodding Eye">
                 <div class="product-image">
                     <img src="src/images/PVC_Rodding_Eye_$0.50.JPG" alt="PVC Rodding Eye">
                 </div>
                 <h3>PVC Rodding Eye</h3>
                 <span class="price">$0.50</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="PVC Y.Junction">
                 <div class="product-image">
                     <img src="src/images/PVC_Y.Junction_$0.50.png" alt="PVC Y.Junction">
                 </div>
                 <h3>PVC Y.Junction</h3>
                 <span class="price">$0.50</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="Three Way PVC Pipe">
                 <div class="product-image">
                     <img src="src/images/Three_Way_PVC_Pipe_$2.JPG" alt="Three Way PVC Pipe">
                 </div>
                 <h3>Three Way PVC Pipe</h3>
                 <span class="price">$2</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="PVC I.E.T">
                 <div class="product-image">
                     <img src="src/images/PVC_I.E.T_$3.50.JPG" alt="PVC I.E.T">
                 </div>
                 <h3>PVC I.E.T</h3>
                 <span class="price">$3.50</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="plumbing" data-name="PVC pipes">
                 <div class="product-image">
                     <img src="src/images/PVC_pipes_110mm_$15_25mm_$7_32mm_$8.JPG" alt="PVC pipes 110mm, 25mm, 32mm">
                 </div>
                 <h3>PVC pipes 110mm, 25mm, 32mm</h3>
                 <span class="price">110mm $15, 25mm $7, 32mm $8</span>
             </div>
-            <div class="product-card">
+            <div class="product-card" data-category="kitchen" data-name="Single Tray Kitchen Sinks">
                 <div class="product-image">
                     <img src="src/images/Single_Tray_Kitchen_Sinks_$45.jpeg" alt="Single Tray Kitchen Sinks">
                 </div>
@@ -211,5 +212,37 @@
             <p>&copy; 2024 Hardware Company. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const productsGrid = document.getElementById('productsGrid');
+            const productCards = document.querySelectorAll('.product-card');
+
+            function filterProducts() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedCategory = categoryFilter.value;
+
+                productCards.forEach(card => {
+                    const productName = card.getAttribute('data-name').toLowerCase();
+                    const productCategory = card.getAttribute('data-category');
+                    
+                    const matchesSearch = productName.includes(searchTerm);
+                    const matchesCategory = selectedCategory === 'all' || productCategory === selectedCategory;
+
+                    if (matchesSearch && matchesCategory) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            // Add event listeners
+            searchInput.addEventListener('input', filterProducts);
+            categoryFilter.addEventListener('change', filterProducts);
+        });
+    </script>
 </body>
 </html>
