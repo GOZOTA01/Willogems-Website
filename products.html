@@ -213,6 +213,11 @@
         </div>
     </footer>
 
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" title="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
@@ -220,11 +225,18 @@
             const productsGrid = document.getElementById('productsGrid');
             const productCards = document.querySelectorAll('.product-card');
 
+            // Enhanced search with debouncing
+            let searchTimeout;
+            function debouncedSearch() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(filterProducts, 300);
+            }
+
             function filterProducts() {
                 const searchTerm = searchInput.value.toLowerCase();
                 const selectedCategory = categoryFilter.value;
 
-                productCards.forEach(card => {
+                productCards.forEach((card, index) => {
                     const productName = card.getAttribute('data-name').toLowerCase();
                     const productCategory = card.getAttribute('data-category');
                     
@@ -233,15 +245,132 @@
 
                     if (matchesSearch && matchesCategory) {
                         card.style.display = 'block';
+                        // Add staggered animation
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, index * 100);
                     } else {
-                        card.style.display = 'none';
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
                     }
                 });
             }
 
-            // Add event listeners
-            searchInput.addEventListener('input', filterProducts);
+            // Add event listeners with enhanced feedback
+            searchInput.addEventListener('input', debouncedSearch);
             categoryFilter.addEventListener('change', filterProducts);
+
+            // Product card interactions
+            productCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Add click animation
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+
+                card.addEventListener('mouseenter', function() {
+                    this.style.cursor = 'pointer';
+                });
+            });
+
+            // Scroll to top functionality
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            scrollToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Taskbar scroll effect
+            const taskbar = document.querySelector('.top-taskbar');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 50) {
+                    taskbar.classList.add('scrolled');
+                } else {
+                    taskbar.classList.remove('scrolled');
+                }
+            });
+
+            // Animate products on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+
+            // Initialize product cards with animation
+            productCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+
+            // Enhanced search bar interaction
+            const searchBar = document.querySelector('.search-bar');
+            searchInput.addEventListener('focus', function() {
+                searchBar.style.transform = 'scale(1.02)';
+            });
+
+            searchInput.addEventListener('blur', function() {
+                searchBar.style.transform = 'scale(1)';
+            });
+
+            // Category filter enhancement
+            categoryFilter.addEventListener('change', function() {
+                this.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+
+            // Loading animation for search
+            function showLoading() {
+                productCards.forEach(card => {
+                    card.classList.add('loading');
+                });
+            }
+
+            function hideLoading() {
+                productCards.forEach(card => {
+                    card.classList.remove('loading');
+                });
+            }
+
+            // Enhanced search with loading
+            searchInput.addEventListener('input', function() {
+                if (this.value.length > 0) {
+                    showLoading();
+                }
+                debouncedSearch();
+                setTimeout(hideLoading, 500);
+            });
         });
     </script>
 </body>
