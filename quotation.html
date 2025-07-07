@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Quotation - Willogems</title>
+    <link rel="stylesheet" href="src/styles/style.css">
+    <link rel="stylesheet" href="src/styles/quotation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="top-taskbar">
+        <img src="src/taskbar.jpeg" alt="Taskbar" class="taskbar-image">
+    </div>
+
+    <main>
+        <section class="quotation-header">
+            <h1>Request a Quotation</h1>
+            <p>Select products and quantities to get a custom quote for your project</p>
+        </section>
+
+        <div class="quotation-container">
+            <!-- Products Selection Section -->
+            <section class="products-selection">
+                <h2>Select Products</h2>
+                <div class="products-filter">
+                    <select class="category-filter" id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="plumbing">Plumbing</option>
+                        <option value="tiles">Tiles</option>
+                        <option value="bathroom">Bathroom</option>
+                        <option value="kitchen">Kitchen</option>
+                    </select>
+                    <div class="search-bar">
+                        <input type="text" id="searchInput" placeholder="Search products...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="products-grid" id="productsGrid">
+                    <div class="product-card" data-category="plumbing" data-name="PVC Straight Fitting" data-price="2">
+                        <div class="product-image">
+                            <img src="src/images/PVC_Straight_Fitting_$2.JPG" alt="PVC Straight Fitting">
+                        </div>
+                        <h3>PVC Straight Fitting</h3>
+                        <span class="price">$2</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="Copper Taps" data-price="2.00">
+                        <div class="product-image">
+                            <img src="src/images/Copper_Taps_$2.00.jpeg" alt="Copper Taps">
+                        </div>
+                        <h3>Copper Taps</h3>
+                        <span class="price">$2.00</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="Boss Connector" data-price="0.50">
+                        <div class="product-image">
+                            <img src="src/images/Boss_Connector_$0.50.jpg" alt="Boss Connector">
+                        </div>
+                        <h3>Boss Connector</h3>
+                        <span class="price">$0.50</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="50mm PVC FITTINGS" data-price="0.50">
+                        <div class="product-image">
+                            <img src="src/images/50mm_PVC_FITTINGS_$0.50.jpg" alt="50mm PVC FITTINGS">
+                        </div>
+                        <h3>50mm PVC FITTINGS</h3>
+                        <span class="price">$0.50</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="CopperFittings" data-price="0.50">
+                        <div class="product-image">
+                            <img src="src/images/CopperFittings_$0.50.png" alt="CopperFittings">
+                        </div>
+                        <h3>CopperFittings</h3>
+                        <span class="price">$0.50</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="bathroom" data-name="Shower rose" data-price="5">
+                        <div class="product-image">
+                            <img src="src/images/Shower_rose_$5.JPG" alt="Shower rose">
+                        </div>
+                        <h3>Shower rose</h3>
+                        <span class="price">$5</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="bathroom" data-name="Sink Toilet Set" data-price="26">
+                        <div class="product-image">
+                            <img src="src/images/Sink_Toilet_Set_$26.JPG" alt="Sink Toilet Set">
+                        </div>
+                        <h3>Sink Toilet Set</h3>
+                        <span class="price">$26</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="tiles" data-name="40x40 Tiles Matt Finish" data-price="8">
+                        <div class="product-image">
+                            <img src="src/images/40x40_Tiles_Matt_Finish_$8_$50.jpeg" alt="40x40 Tiles Matt Finish">
+                        </div>
+                        <h3>40x40 Tiles Matt Finish</h3>
+                        <span class="price">$8, $50</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="tiles" data-name="SupaFix Porcelain" data-price="4">
+                        <div class="product-image">
+                            <img src="src/images/SupaFix_Porcelain_$4.JPG" alt="SupaFix Porcelain">
+                        </div>
+                        <h3>SupaFix Porcelain</h3>
+                        <span class="price">$4</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="tiles" data-name="SupaFix Ceramic Tile Adhesive" data-price="3.60">
+                        <div class="product-image">
+                            <img src="src/images/SupaFix_Ceramic_Tile_Adhesive_$3.60.JPG" alt="SupaFix Ceramic Tile Adhesive">
+                        </div>
+                        <h3>SupaFix Ceramic Tile Adhesive</h3>
+                        <span class="price">$3.60</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="Gas Canister" data-price="2.50">
+                        <div class="product-image">
+                            <img src="src/images/Gas_Canister_$2.50.jpeg" alt="Gas Canister">
+                        </div>
+                        <h3>Gas Canister</h3>
+                        <span class="price">$2.50</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="bathroom" data-name="Bath Tub" data-price="70">
+                        <div class="product-image">
+                            <img src="src/images/Bath_Tub_$70.jpeg" alt="Bath Tub">
+                        </div>
+                        <h3>Bath Tub</h3>
+                        <span class="price">$70</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="Gully head" data-price="2">
+                        <div class="product-image">
+                            <img src="src/images/Gully_head_$2.JPG" alt="Gully head">
+                        </div>
+                        <h3>Gully head</h3>
+                        <span class="price">$2</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="bathroom" data-name="Bathroom Basin Mixer Tap" data-price="3">
+                        <div class="product-image">
+                            <img src="src/images/Bathroom_Basin_Mixer_Tap_$3.PNG" alt="Bathroom Basin Mixer Tap">
+                        </div>
+                        <h3>Bathroom Basin Mixer Tap</h3>
+                        <span class="price">$3</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="RV Faucet" data-price="10">
+                        <div class="product-image">
+                            <img src="src/images/RV_Faucet_$10.jpeg" alt="RV Faucet">
+                        </div>
+                        <h3>RV Faucet</h3>
+                        <span class="price">$10</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="Wall Faucet" data-price="7">
+                        <div class="product-image">
+                            <img src="src/images/Wall_Faucet_$7.JPG" alt="Wall Faucet">
+                        </div>
+                        <h3>Wall Faucet</h3>
+                        <span class="price">$7</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="PVC Rodding Eye" data-price="0.50">
+                        <div class="product-image">
+                            <img src="src/images/PVC_Rodding_Eye_$0.50.JPG" alt="PVC Rodding Eye">
+                        </div>
+                        <h3>PVC Rodding Eye</h3>
+                        <span class="price">$0.50</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="PVC Y.Junction" data-price="0.50">
+                        <div class="product-image">
+                            <img src="src/images/PVC_Y.Junction_$0.50.png" alt="PVC Y.Junction">
+                        </div>
+                        <h3>PVC Y.Junction</h3>
+                        <span class="price">$0.50</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="Three Way PVC Pipe" data-price="2">
+                        <div class="product-image">
+                            <img src="src/images/Three_Way_PVC_Pipe_$2.JPG" alt="Three Way PVC Pipe">
+                        </div>
+                        <h3>Three Way PVC Pipe</h3>
+                        <span class="price">$2</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="PVC I.E.T" data-price="3.50">
+                        <div class="product-image">
+                            <img src="src/images/PVC_I.E.T_$3.50.JPG" alt="PVC I.E.T">
+                        </div>
+                        <h3>PVC I.E.T</h3>
+                        <span class="price">$3.50</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="plumbing" data-name="PVC pipes" data-price="15">
+                        <div class="product-image">
+                            <img src="src/images/PVC_pipes_110mm_$15_25mm_$7_32mm_$8.JPG" alt="PVC pipes 110mm, 25mm, 32mm">
+                        </div>
+                        <h3>PVC pipes 110mm, 25mm, 32mm</h3>
+                        <span class="price">110mm $15, 25mm $7, 32mm $8</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                    <div class="product-card" data-category="kitchen" data-name="Single Tray Kitchen Sinks" data-price="45">
+                        <div class="product-image">
+                            <img src="src/images/Single_Tray_Kitchen_Sinks_$45.jpeg" alt="Single Tray Kitchen Sinks">
+                        </div>
+                        <h3>Single Tray Kitchen Sinks</h3>
+                        <span class="price">$45</span>
+                        <button class="add-to-quote-btn" onclick="addToQuote(this)">
+                            <i class="fas fa-plus"></i> Add to Quote
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quote Cart Section -->
+            <section class="quote-cart">
+                <div class="cart-header">
+                    <h2><i class="fas fa-shopping-cart"></i> Your Quote</h2>
+                    <button class="clear-cart-btn" onclick="clearCart()">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+                
+                <div class="cart-items" id="cartItems">
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>No items in your quote yet</p>
+                        <p>Select products from the left to build your quote</p>
+                    </div>
+                </div>
+
+                <div class="cart-summary" id="cartSummary" style="display: none;">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (15%):</span>
+                        <span id="tax">$0.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total">$0.00</span>
+                    </div>
+                </div>
+
+                <div class="quote-actions">
+                    <button class="request-quote-btn" id="requestQuoteBtn" onclick="requestQuote()" disabled>
+                        <i class="fas fa-file-invoice"></i> Request Quote
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Quote Request Modal -->
+        <div class="modal" id="quoteModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Request Quote</h2>
+                    <button class="close-modal" onclick="closeModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="quoteForm" class="quote-form">
+                    <div class="form-group">
+                        <label for="customerName">Full Name *</label>
+                        <input type="text" id="customerName" name="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerEmail">Email Address *</label>
+                        <input type="email" id="customerEmail" name="customerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number *</label>
+                        <input type="tel" id="customerPhone" name="customerPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="projectDescription">Project Description</label>
+                        <textarea id="projectDescription" name="projectDescription" rows="4" placeholder="Tell us about your project..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="deliveryAddress">Delivery Address</label>
+                        <textarea id="deliveryAddress" name="deliveryAddress" rows="3" placeholder="Where should we deliver the items?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="urgency">Urgency</label>
+                        <select id="urgency" name="urgency">
+                            <option value="standard">Standard (3-5 business days)</option>
+                            <option value="urgent">Urgent (1-2 business days)</option>
+                            <option value="rush">Rush (Same day if possible)</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                        <button type="submit" class="submit-quote-btn">
+                            <i class="fas fa-paper-plane"></i> Send Quote Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="phone-numbers">
+                    <p><i class="fas fa-phone"></i> +263 772 138 007</p>
+                    <p><i class="fas fa-phone"></i> +263 718 090 910</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Willogems. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="src/scripts/quotation.js"></script>
+</body>
+</html> 

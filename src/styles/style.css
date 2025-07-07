@@ -456,14 +456,33 @@ footer {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 30px;
     align-items: center;
-    gap: 20px;
     flex-wrap: wrap;
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
     backdrop-filter: blur(5px);
+}
+
+.products-filter .quote-btn {
+    background-color: var(--accent-red);
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.products-filter .quote-btn:hover {
+    background-color: #d63384;
+    transform: translateY(-2px);
 }
 
 .category-filter {
@@ -698,11 +717,22 @@ footer {
 .shop-now-container {
     text-align: center;
     margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .shop-now-container .cta-button {
-    padding: 15px 40px;
-    font-size: 1.2em;
+    margin: 0;
+}
+
+.quote-btn {
+    background-color: var(--secondary-blue) !important;
+}
+
+.quote-btn:hover {
+    background-color: var(--primary-blue) !important;
 }
 
 /* Interactive Animations and Effects */
